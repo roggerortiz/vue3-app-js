@@ -1,0 +1,16 @@
+root = true
+
+[src/**/*.vue]
+charset = utf-8
+indent_style = space
+indent_size = 3
+
+[**/*.js]
+charset = utf-8
+indent_style = space
+indent_size = 3
+
+[**/*.json]
+charset = utf-8
+indent_style = space
+indent_size = 3
