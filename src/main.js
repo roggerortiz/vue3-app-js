@@ -1,7 +1,7 @@
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 
-import 'bootstrap/dist/css/bootstrap.css'
+import 'mdb-vue-ui-kit/css/mdb.min.css';
 import './assets/base.css'
 
 import App from './App.vue'

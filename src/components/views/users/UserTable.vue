@@ -1,13 +1,12 @@
 <script setup>
-import { useRouter } from 'vue-router'
-import { RouterLink } from "vue-router"
+import { MDBTable, MDBBtn, MDBIcon } from "mdb-vue-ui-kit";
 import { useUserStore } from "@/stores/user"
 
-const router = useRouter()
 const userStore = useUserStore()
 
-const handleEdit = (id) => {
-   router.push({ name: 'userForm', params: { id } })
+const handleEdit = async (id) => {
+   await userStore.fetchUserById(id)
+   userStore.toggleForm()
 }
 
 const handleRemove = (id) => {
@@ -16,7 +15,7 @@ const handleRemove = (id) => {
 </script>
 
 <template>
-   <table class="table table-bordered table-stripped table-hover">
+   <MDBTable responsive striped hover border sm align="middle">
       <thead>
          <tr>
             <th scope="col">Name</th>
@@ -31,13 +30,17 @@ const handleRemove = (id) => {
             <td>{{ user.name }}</td>
             <td class="text-center">{{ user.username }}</td>
             <td>{{ user.email }}</td>
-            <td class="text-center">
-               <button class="btn btn-warning py-0 px-2" @click="() => handleEdit(user.id)">Edit</button>
+            <td class="td-btn">
+               <MDBBtn color="warning" @click="handleEdit(user.id)">
+                  <MDBIcon icon="edit" />
+               </MDBBtn>
             </td>
-            <td class="text-center">
-               <button class="btn btn-danger py-0 px-2" @click="() => handleRemove(user.id)">Remove</button>
+            <td class="td-btn">
+               <MDBBtn color="danger" @click="handleRemove(user.id)">
+                  <MDBIcon icon="trash" />
+               </MDBBtn>
             </td>
          </tr>
       </tbody>
-   </table>
+   </MDBTable>
 </template>

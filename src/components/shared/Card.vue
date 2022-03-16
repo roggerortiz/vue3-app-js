@@ -1,4 +1,7 @@
 <script setup>
+import { defineProps } from 'vue'
+import { MDBCard, MDBCardHeader, MDBCardTitle, MDBCardBody, MDBCardFooter } from 'mdb-vue-ui-kit'
+
 defineProps({
    title: {
       type: String,
@@ -16,18 +19,20 @@ defineProps({
 </script>
 
 <template>
-   <div class="card">
-      <template v-if="header">
-         <slot name="header"></slot>
-      </template>
-      <template v-else>
-         <h5 class="card-header">{{ title }}</h5>
-      </template>
-      <div class="card-body">
+   <MDBCard>
+      <MDBCardHeader bg="dark" class="text-white">
+         <template v-if="header">
+            <slot name="header"></slot>
+         </template>
+         <template v-else>
+            <MDBCardTitle class="m-0">{{ title }}</MDBCardTitle>
+         </template>
+      </MDBCardHeader>
+      <MDBCardBody>
          <slot></slot>
-      </div>
-      <div class="card-footer text-end" v-if="footer">
+      </MDBCardBody>
+      <MDBCardFooter class="text-end" v-if="footer">
          <slot name="footer"></slot>
-      </div>
-   </div>
+      </MDBCardFooter>
+   </MDBCard>
 </template>

@@ -1,3 +1,26 @@
+.wrapper {
+   padding-top: 1.5rem;
+   padding-bottom: 1.5rem;
+}
+
+.card {
+   border: 1px solid rgba(0,0,0,.125) !important;
+}
+
+table {
+   margin-bottom: 0 !important;
+}
+
 th {
    text-align: center;
+}
+
+td.td-btn {
+   width: 55px;
+   padding: 0.75rem;
+   text-align: center;
+}
+
+td.td-btn .btn {
+   padding: 0.25rem 0.5rem;
 }

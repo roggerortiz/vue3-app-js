@@ -4,6 +4,7 @@ export const useUserStore = defineStore({
    id: 'user',
    state: () => ({
       isFetched: false,
+      showForm: false,
       users: [],
       user: {}
    }),
@@ -26,6 +27,9 @@ export const useUserStore = defineStore({
          const response = await fetch(url)
          const data = await response.json()
          this.user = data
+      },
+      toggleForm() {
+         this.showForm = !this.showForm
       },
       setUser (user) {
          this.user = user

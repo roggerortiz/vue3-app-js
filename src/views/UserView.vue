@@ -1,41 +1,34 @@
 <script setup>
 import { onMounted } from 'vue'
-import { useRoute, useRouter } from "vue-router";
-import { useUserStore } from "@/stores/user";
-import Card from "@/components/shared/Card.vue";
-import UserForm from "@/components/views/users/UserForm.vue";
+import { MDBCardTitle, MDBBtn, MDBIcon } from 'mdb-vue-ui-kit'
+import { useUserStore } from "@/stores/user"
+import Card from "@/components/shared/Card.vue"
+import UserTable from "@/components/views/users/UserTable.vue"
+import UserForm from '../components/views/users/UserForm.vue';
 
-const route = useRoute()
-const router = useRouter()
 const userStore = useUserStore()
 
 onMounted(() => {
-   if (!route.params.id)
-      userStore.setUser({})
-   else
-      userStore.fetchUserById(route.params.id)
+   userStore.fetchUsers()
 })
 
-const handleCancel = () => {
-   router.replace({ name: 'users' })
-}
-
-const handleSave = () => {
-   userStore.saveUser()
-   router.replace({ name: 'users' })
+const handleCreate = () => {
+   userStore.setUser({})
+   userStore.toggleForm()
 }
 </script>
 
 <template>
-   <div class="row justify-content-center">
-      <div class="col-4">
-         <Card :title="userStore.formTitle" footer>
-            <UserForm />
-            <template #footer>
-               <button class="btn btn-secondary py-0 me-2" @click="handleCancel">Cancel</button>
-               <button class="btn btn-primary py-0" @click="handleSave">Save</button>
-            </template>
-         </Card>
-      </div>
-   </div>
+   <Card header>
+      <template #header>
+         <div class="d-flex justify-content-between align-items-center">
+            <MDBCardTitle class="m-0">Users</MDBCardTitle>
+            <MDBBtn color="primary" size="sm" @click="handleCreate()">
+               <MDBIcon icon="plus-circle" class="me-2" />Create
+            </MDBBtn>
+         </div>
+      </template>
+      <UserTable />
+      <UserForm />
+   </Card>
 </template>

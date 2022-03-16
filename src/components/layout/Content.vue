@@ -1,9 +1,13 @@
+<script setup>
+import { MDBContainer, MDBRow, MDBCol } from 'mdb-vue-ui-kit'
+</script>
+
 <template>
-   <div class="container-fluid mt-4">
-      <div class="row justify-content-center">
-         <div class="col-8">
+   <MDBContainer fluid class="wrapper">
+      <MDBRow class="justify-content-center">
+         <MDBCol col="8">
             <slot></slot>
-         </div>
-      </div>
-   </div>
+         </MDBCol>
+      </MDBRow>
+   </MDBContainer>
 </template>
