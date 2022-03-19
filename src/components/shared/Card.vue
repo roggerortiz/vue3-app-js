@@ -1,5 +1,4 @@
 <script setup>
-import { defineProps } from 'vue'
 import { MDBCard, MDBCardHeader, MDBCardTitle, MDBCardBody, MDBCardFooter } from 'mdb-vue-ui-kit'
 
 defineProps({

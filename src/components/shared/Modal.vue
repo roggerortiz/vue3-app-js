@@ -1,6 +1,5 @@
 <script setup>
-import { defineProps, defineEmits } from 'vue'
-import { MDBModal, MDBModalHeader, MDBModalTitle, MDBModalBody, MDBModalFooter, MDBBtn, MDBIcon } from 'mdb-vue-ui-kit'
+import { MDBModal, MDBModalHeader, MDBModalTitle, MDBModalBody, MDBModalFooter, MDBRow, MDBCol, MDBBtn, MDBIcon } from 'mdb-vue-ui-kit'
 
 defineProps({
    id: {
