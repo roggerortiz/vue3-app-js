@@ -9,8 +9,9 @@ const handleInput = (event) => {
    userStore.inputUser({ name, value })
 }
 
-const handleSave = () => {
-   userStore.saveUser()
+const handleSave = async () => {
+   await userStore.saveUser()
+   userStore.fetchUsers()
    userStore.toggleForm()
 }
 </script>

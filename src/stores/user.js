@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia'
+import { getUsers, getUserById, createUser, updateUser, deleteUser } from '@/services/user.service'
 
 export const useUserStore = defineStore({
    id: 'user',
@@ -15,20 +16,14 @@ export const useUserStore = defineStore({
    },
    actions: {
       async fetchUsers () {
-         if (this.isFetched) return
-         const url = 'https://jsonplaceholder.typicode.com/users'
-         const response = await fetch(url)
-         const data = await response.json()
-         this.users = data
-         this.isFetched = true
+         const data = await getUsers()
+         this.users = data.map(item => ({ ...item, id: item._id }))
       },
       async fetchUserById (id) {
-         const url = `https://jsonplaceholder.typicode.com/users/${id}`
-         const response = await fetch(url)
-         const data = await response.json()
-         this.user = data
+         const data = await getUserById(id)
+         this.user = { ...data, id: data._id }
       },
-      toggleForm() {
+      toggleForm () {
          this.showForm = !this.showForm
       },
       setUser (user) {
@@ -37,13 +32,15 @@ export const useUserStore = defineStore({
       inputUser ({ name, value }) {
          this.user = { ...this.user, [name]: value }
       },
-      saveUser () {
-         this.users = !this.user.id ? [...this.users, this.user] :
-            this.users.map(user => (user.id === this.user.id ? this.user : user))
+      async saveUser () {
+         if (!this.user.id)
+            await createUser(this.user)
+         else
+            await updateUser(this.user)
          this.user = {}
       },
-      removeUser (id) {
-         this.users = this.users.filter((user) => user.id !== id)
+      async deleteUser (id) {
+         await deleteUser(id)
       }
    }
 })

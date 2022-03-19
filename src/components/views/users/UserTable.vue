@@ -9,8 +9,9 @@ const handleEdit = async (id) => {
    userStore.toggleForm()
 }
 
-const handleRemove = (id) => {
-   userStore.removeUser(id)
+const handleRemove = async (id) => {
+   await userStore.deleteUser(id)
+   userStore.fetchUsers()
 }
 </script>
 
